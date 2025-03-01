@@ -1,0 +1,32 @@
+<form (ngSubmit)="crearInscripcion()">
+    <div>
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" [(ngModel)]="inscripcion.nombre" name="nombre" required>
+    </div>
+  
+    <div>
+      <label for="telefono">Teléfono</label>
+      <input id="telefono" type="text" [(ngModel)]="inscripcion.telefono" name="telefono" required>
+    </div>
+  
+    <div>
+      <label for="id_actividad">ID Actividad</label>
+      <input id="id_actividad" type="number" [(ngModel)]="inscripcion.id_actividad" name="id_actividad" required>
+    </div>
+  
+    <div>
+      <label for="fecha_inscripcion">Fecha de inscripción</label>
+      <input id="fecha_inscripcion" type="datetime-local" [(ngModel)]="inscripcion.fecha_inscripcion" name="fecha_inscripcion" required>
+    </div>
+  
+    <div>
+      <label for="estado">Estado</label>
+      <select id="estado" [(ngModel)]="inscripcion.estado" name="estado" required>
+        <option value="pendiente">Pendiente</option>
+        <option value="confirmada">Confirmada</option>
+        <option value="cancelada">Cancelada</option>
+      </select>
+    </div>
+  
+    <button type="submit">Crear Inscripción</button>
+  </form>

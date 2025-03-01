@@ -12,6 +12,8 @@ import { ActividadListCentroComponent } from './components/actividad-list-centro
 import { NuevaReservaComponent } from './components/nueva-reserva/nueva-reserva.component';
 import { CancelarReservaComponent } from './components/cancelar-reserva/cancelar-reserva.component';
 import { MisReservasComponent } from './components/mis-reservas/mis-reservas.component';
+import { NuevaInscripcionComponent } from './components/nueva-inscripcion/nueva-inscripcion.component';
+import { MisInscripcionesComponent } from './components/mis-inscripciones/mis-inscripciones.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -39,5 +41,9 @@ export const routes: Routes = [
     // RUTAS DE RESERVAS
     { path: 'reserva', component: NuevaReservaComponent },
     { path: 'reservas/cancelar/:id', component: CancelarReservaComponent },
-    { path: 'reservas', component: MisReservasComponent }
+    { path: 'reservas', component: MisReservasComponent },
+    // Rutas de INSCRIPCIONES
+    { path: 'inscripcion', component: NuevaInscripcionComponent },
+    { path: 'inscrpciones/cancelar/:id', component: CancelarReservaComponent },
+    { path: 'inscripciones', component: MisInscripcionesComponent }
 ];
