@@ -1,0 +1,13 @@
+<h2>Refresh token</h2>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="successMessage" class="alert alert-success">
+  {{ successMessage }}
+</div>
+
+<button (click)="refreshToken()" class="btn btn-primary">
+  Refresh Token
+</button>

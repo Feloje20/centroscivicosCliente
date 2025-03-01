@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   saveToken(token: string): void {
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', token); // 🔥 Reemplazamos el token anterior
   }
 
   getToken(): string | null {
@@ -24,6 +24,10 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('token'); // Eliminamos solo el token al cerrar sesión
+  }
+
+  refreshToken(): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}token/refresh`, {});
   }
 }
