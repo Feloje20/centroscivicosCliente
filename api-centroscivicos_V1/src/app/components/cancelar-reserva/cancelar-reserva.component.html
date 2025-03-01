@@ -1,0 +1,9 @@
+<div *ngIf="errorMessage" style="color: red;">
+    <p>{{ errorMessage }}</p>
+  </div>
+  
+  <div *ngIf="successMessage" style="color: green;">
+    <p>{{ successMessage }}</p>
+  </div>
+  
+  <button (click)="cancelarReserva()">Cancelar Reserva</button>

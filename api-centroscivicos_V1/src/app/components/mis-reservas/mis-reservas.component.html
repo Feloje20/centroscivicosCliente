@@ -1,0 +1,17 @@
+<div *ngIf="errorMessage" style="color: red;">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="reservas.length === 0">
+  <p>No tienes reservas.</p>
+</div>
+
+<div *ngIf="reservas.length > 0">
+  <ul>
+    <li *ngFor="let reserva of reservas">
+      <p>{{ reserva.nombre }}</p>
+      <p>{{ reserva.fecha_inicio }} - {{ reserva.fecha_final }}</p>
+      <button (click)="cancelarReserva(reserva.id)">Cancelar Reserva</button>
+    </li>
+  </ul>
+</div>

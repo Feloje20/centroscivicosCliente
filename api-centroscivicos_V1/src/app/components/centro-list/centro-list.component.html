@@ -1,0 +1,13 @@
+<div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="centros.length === 0">
+    No se encontraron centros.
+  </div>
+  
+  <ul *ngIf="centros.length > 0">
+    <li *ngFor="let centro of centros">
+      {{ centro.nombre }} - {{ centro.direccion }}
+    </li>
+  </ul>

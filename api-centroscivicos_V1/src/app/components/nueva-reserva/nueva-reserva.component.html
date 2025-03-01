@@ -1,0 +1,33 @@
+<form (ngSubmit)="crearReserva()">
+  <div>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" [(ngModel)]="reserva.nombre" name="nombre" required>
+  </div>
+
+  <div>
+    <label for="telefono">Teléfono</label>
+    <input id="telefono" type="text" [(ngModel)]="reserva.telefono" name="telefono" required>
+  </div>
+
+  <div>
+    <label for="fecha_inicio">Fecha de inicio</label>
+    <input id="fecha_inicio" type="date" [(ngModel)]="reserva.fecha_inicio" name="fecha_inicio" required>
+  </div>
+
+  <div>
+    <label for="fecha_final">Fecha final</label>
+    <input id="fecha_final" type="date" [(ngModel)]="reserva.fecha_final" name="fecha_final" required>
+  </div>
+
+  <div>
+    <label for="estado">Estado</label>
+    <select id="estado" [(ngModel)]="reserva.estado" name="estado" required>
+      <option value="pendiente">Pendiente</option>
+      <option value="confirmada">Confirmada</option>
+      <option value="cancelada">Cancelada</option>
+    </select>
+  </div>
+
+  <button type="submit">Crear Reserva</button>
+</form>
+

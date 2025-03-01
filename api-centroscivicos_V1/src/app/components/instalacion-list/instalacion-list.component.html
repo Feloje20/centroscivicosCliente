@@ -1,0 +1,25 @@
+<div *ngIf="isLoading">Cargando instalaciones...</div>
+
+<div *ngIf="!isLoading">
+  <h2>Instalaciones del Centro Cívico</h2>
+
+  <!-- Si hay instalaciones disponibles, mostrar en una lista -->
+  <div *ngIf="instalaciones.length > 0">
+    <ul>
+      <li *ngFor="let instalacion of instalaciones">
+        <strong>{{ instalacion.nombre }}</strong> - {{ instalacion.descripcion }}
+        <br>Capacidad máxima: {{ instalacion.capacidad_maxima }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Si no hay instalaciones, mostrar un mensaje -->
+  <div *ngIf="instalaciones.length === 0">
+    <p>No hay instalaciones disponibles para este centro.</p>
+  </div>
+
+  <!-- Mostrar mensaje de error si hubo un problema -->
+  <div *ngIf="errorMessage" style="color: red;">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>

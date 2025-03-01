@@ -1,0 +1,26 @@
+<div *ngIf="isLoading">Cargando actividades del centro...</div>
+
+<div *ngIf="!isLoading">
+  <h2>Actividades del Centro {{ centroId }}</h2>
+
+  <!-- Si hay actividades disponibles, mostrar en una lista -->
+  <div *ngIf="actividades.length > 0">
+    <ul>
+      <li *ngFor="let actividad of actividades">
+        <strong>{{ actividad.nombre }}</strong> - {{ actividad.descripcion }}
+        <br>Fecha: {{ actividad.fecha_inicio }} - {{ actividad.fecha_final }}
+        <br>Horario: {{ actividad.horario }} - Plazas: {{ actividad.plaza }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Si no hay actividades, mostrar un mensaje -->
+  <div *ngIf="actividades.length === 0">
+    <p>No hay actividades disponibles para este centro.</p>
+  </div>
+
+  <!-- Mostrar mensaje de error si hubo un problema -->
+  <div *ngIf="errorMessage" style="color: red;">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>

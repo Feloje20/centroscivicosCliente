@@ -1,0 +1,43 @@
+<div *ngIf="isLoading">Cargando detalles del centro...</div>
+
+<div *ngIf="!isLoading">
+  <h2>Detalles del Centro Cívico</h2>
+
+  <!-- Información General del Centro -->
+  <div *ngIf="centro">
+    <p><strong>Nombre:</strong> {{ centro.nombre }}</p>
+    <p><strong>Dirección:</strong> {{ centro.direccion }}</p>
+    <p><strong>Teléfono:</strong> {{ centro.telefono }}</p>
+    <p><strong>Horario:</strong> {{ centro.horario }}</p>
+  </div>
+
+  <div *ngIf="centro.foto">
+    <img [src]="centro.foto" alt="Imagen del Centro" style="max-width: 100%; height: auto;" />
+  </div>
+
+  <!-- Instalaciones -->
+  <div *ngIf="centro.instalaciones?.length > 0">
+    <h3>Instalaciones</h3>
+    <ul>
+      <li *ngFor="let instalacion of centro.instalaciones">
+        <strong>{{ instalacion.nombre }}</strong> - {{ instalacion.descripcion }} (Capacidad: {{ instalacion.capacidad_maxima }})
+      </li>
+    </ul>
+  </div>
+
+  <!-- Actividades -->
+  <div *ngIf="centro.actividades?.length > 0">
+    <h3>Actividades</h3>
+    <ul>
+      <li *ngFor="let actividad of centro.actividades">
+        <strong>{{ actividad.nombre }}</strong> - {{ actividad.descripcion }} (Plazas disponibles: {{ actividad.plaza }})
+        <br>
+        <small>Fecha: {{ actividad.fecha_inicio }} a {{ actividad.fecha_final }} - Horario: {{ actividad.horario }}</small>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="errorMessage" style="color: red;">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
