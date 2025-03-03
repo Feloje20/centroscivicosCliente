@@ -14,9 +14,12 @@ import { CancelarReservaComponent } from './components/cancelar-reserva/cancelar
 import { MisReservasComponent } from './components/mis-reservas/mis-reservas.component';
 import { NuevaInscripcionComponent } from './components/nueva-inscripcion/nueva-inscripcion.component';
 import { MisInscripcionesComponent } from './components/mis-inscripciones/mis-inscripciones.component';
+import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
+    // Ruta por defecto
+    { path: '', component: HomeComponent },  
     // Rutas de usuario
     // Ruta de login
     {path: 'login', component: UsuarioLoginComponent},

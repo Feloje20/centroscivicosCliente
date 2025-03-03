@@ -1,0 +1,17 @@
+<section class="home-container">
+    <h1>API de centros cívicos</h1>
+    <!-- Mostrar mensaje de bienvenida con el correo del usuario si está autenticado -->
+    <p *ngIf="authService.isAuthenticated()">Hola {{ userEmail }}</p>
+
+    <!-- Mostrar mensaje por defecto si no está autenticado -->
+    <p *ngIf="!authService.isAuthenticated()">Esta es la página de inicio.</p>
+
+    <!-- Mostrar botón de login si no está autenticado -->
+    <button *ngIf="!authService.isAuthenticated()" [routerLink]="['/login']">Iniciar sesión</button>
+
+    <!-- Mostrar botones de refrescar token y cerrar sesión si está autenticado -->
+    <div *ngIf="authService.isAuthenticated()">
+        <button (click)="refreshToken()">Refrescar token</button> <!-- Redirige a la ruta /dashboard -->
+        <button (click)="logout()">Cerrar sesión</button>
+    </div>
+</section>

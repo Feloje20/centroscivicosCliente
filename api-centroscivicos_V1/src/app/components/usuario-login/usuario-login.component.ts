@@ -26,7 +26,7 @@ export class UsuarioLoginComponent {
         // Guardar el token en localStorage
         this.authService.saveToken(response.jwt); // Asegúrate de usar `jwt`
         // Redirigir a la página principal (descomentar)
-        // this.router.navigate(['/contactos']);
+        this.router.navigate(['']);
       },
       error: (error: any) => {
         // Mostrar el mensaje de error

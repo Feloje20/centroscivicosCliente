@@ -100,4 +100,41 @@ export class AuthService {
       headers: { Authorization: `Bearer ${this.getToken()}` }
     });
   }
+
+  /**
+   * Checks if the user is authenticated.
+   * @returns True if the user is authenticated, false otherwise.
+   */
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
+  /**
+   * Gets the user email
+   * @returns The user email or null if not found.
+   */
+  getUserEmail(): string | null {
+    const token = this.getToken();  // Obtener el token
+  
+    // Si no hay token, devolver null
+    if (!token) {
+      return null;
+    }
+  
+    try {
+      const payload = token.split('.')[1];  // Extraer el payload del token
+      if (!payload) {
+        return null;  // Si no hay payload, devolver null
+      }
+  
+      const decodedPayload = atob(payload);  // Decodificar el payload
+      const parsedPayload = JSON.parse(decodedPayload);  // Convertir el payload decodificado a un objeto
+  
+      // Ahora accedemos al campo email dentro de data
+      return parsedPayload?.data?.email || null;
+  } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      return null;  // Si ocurre un error en el proceso de decodificación, devolver null
+  }
+  }
 }
