@@ -4,6 +4,7 @@ import { Router } from '@angular/router'; // Para la navegación si es necesario
 import { CommonModule } from '@angular/common'; // Importar CommonModule
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { RouterModule } from '@angular/router';  // Importar RouterModule
+import { Location } from '@angular/common'; // Importamos Location
 
 @Component({
   selector: 'app-mis-inscripciones',
@@ -18,7 +19,8 @@ export class MisInscripcionesComponent implements OnInit {
 
   constructor(
     private inscripcionService: InscripcionService,
-    private router: Router) {}
+    private router: Router,
+    private location: Location) {}
 
   ngOnInit(): void {
     this.obtenerInscripciones(); // Llamamos al método para obtener las inscripciones
@@ -47,5 +49,10 @@ export class MisInscripcionesComponent implements OnInit {
         console.error('Error al eliminar inscripción', error);
       }
     });
+  }
+
+  // Método para ir a la página anterior
+  goBack(): void {
+    this.location.back();  // Vuelve a la página anterior
   }
 }

@@ -137,4 +137,26 @@ export class AuthService {
       return null;  // Si ocurre un error en el proceso de decodificación, devolver null
   }
   }
+
+  getUserDetails(): any {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const payload = token.split('.')[1];
+      if (!payload) {
+        return null;
+      }
+
+      const decodedPayload = atob(payload);
+      const parsedPayload = JSON.parse(decodedPayload);
+
+      return parsedPayload?.data || null;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
 }

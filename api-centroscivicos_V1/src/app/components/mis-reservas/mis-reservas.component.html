@@ -2,6 +2,8 @@
   <p>{{ errorMessage }}</p>
 </div>
 
+<button class="back-button" (click)="goBack()">Volver</button>
+
 <h2>Mis reservas</h2>
 
 <div *ngIf="reservas.length === 0" class="no-reservas">

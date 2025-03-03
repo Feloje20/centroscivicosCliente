@@ -5,19 +5,22 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { GuardaIdsService } from '../../services/guarda-ids.service';
 import { Location } from '@angular/common'; // Importamos Location
+import { FormsModule } from '@angular/forms'; // Importar FormsModule
 
 @Component({
   selector: 'app-instalacion-list-all',
   templateUrl: './instalacion-list-all.component.html',
   styleUrls: ['./instalacion-list-all.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   providers: [AuthService]
 })
 export class InstalacionListAllComponent implements OnInit {
   instalaciones: any[] = []; // Lista de todas las instalaciones
   errorMessage: string = '';
   isLoading: boolean = true;
+  searchQuery: string = '';
+  filteredInstalaciones: any[] = [];
 
   constructor(
     private centroService: CentroService,
@@ -36,6 +39,7 @@ export class InstalacionListAllComponent implements OnInit {
     this.centroService.getInstalaciones().subscribe({
       next: (data) => {
         this.instalaciones = data; // Asignamos la respuesta a instalaciones
+        this.filteredInstalaciones = [...this.instalaciones]; // Asignamos a filteredActividades después de cargar
         this.isLoading = false; // Ya terminamos de cargar
       },
       error: (err) => {
@@ -58,4 +62,14 @@ export class InstalacionListAllComponent implements OnInit {
     this.location.back();  // Vuelve a la página anterior
   }
 
+  filtrarInstalaciones(): void {
+    if (this.searchQuery.trim() === '') {
+      // Si no hay búsqueda, mostrar todas las instalaciones
+      this.filteredInstalaciones = this.instalaciones;
+    } else {
+      // Si hay un término de búsqueda, filtrar las instalaciones
+      this.filteredInstalaciones = this.instalaciones.filter((instalacion) =>
+      instalacion.nombre.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    }
+  }
 }

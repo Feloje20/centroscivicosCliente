@@ -5,10 +5,21 @@
   
   <h2 class="titulo">Lista de Instalaciones</h2>
 
+  <!-- Buscador de instalaciones -->
+  <div class="buscador-container">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="filtrarInstalaciones()"
+      placeholder="Buscar instalación..."
+      class="buscador-input"
+    />
+  </div>
+
   <!-- Si hay instalaciones disponibles, mostrar en una lista -->
   <div *ngIf="instalaciones.length > 0">
     <ul class="instalaciones-lista">
-      <li *ngFor="let instalacion of instalaciones" class="instalacion-item">
+      <li *ngFor="let instalacion of filteredInstalaciones" class="instalacion-item">
         <div class="instalacion-header">
           <strong class="instalacion-nombre">{{ instalacion.nombre }}</strong>
         </div>

@@ -4,6 +4,8 @@ import { Router } from '@angular/router'; // Para la navegación si es necesario
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';  // Importar RouterModule
+import { Location } from '@angular/common'; // Importamos Location
+
 
 @Component({
   selector: 'app-mis-reservas',
@@ -18,7 +20,8 @@ export class MisReservasComponent implements OnInit {
 
   constructor(
     private reservaService: ReservaService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -47,5 +50,10 @@ export class MisReservasComponent implements OnInit {
         this.errorMessage = 'Hubo un error al cancelar la reserva';
       }
     );
+  }
+
+  // Método para ir a la página anterior
+  goBack(): void {
+    this.location.back();  // Vuelve a la página anterior
   }
 }

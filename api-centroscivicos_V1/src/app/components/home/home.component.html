@@ -1,7 +1,7 @@
 <section class="home-container">
     <h1>API de centros cívicos</h1>
     <!-- Mostrar mensaje de bienvenida con el correo del usuario si está autenticado -->
-    <p *ngIf="authService.isAuthenticated()">Hola {{ userEmail }}</p>
+    <p *ngIf="authService.isAuthenticated()">Hola {{ userName }} {{ userEmail }}</p>
 
     <!-- Mostrar mensaje por defecto si no está autenticado -->
     <p *ngIf="!authService.isAuthenticated()">Esta es la página de inicio.</p>
@@ -12,10 +12,34 @@
         <button [routerLink]="['/register']">Registrarse</button>
     </div>
 
+    <h2>Actualizar datos</h2>
+
+    <div *ngIf="authService.isAuthenticated()">
+        <form (ngSubmit)="actualizarUsuario()">
+            <div>
+                <label for="userName">Nombre de usuario:</label>
+                <input type="text" id="userName" [(ngModel)]="userName" name="name" required />
+            </div>
+
+            <div>
+                <label for="userEmail">Correo electrónico:</label>
+                <input type="email" id="userEmail" [(ngModel)]="userEmail" name="email" required />
+            </div>
+
+            <div>
+                <label for="userPassword">Contraseña:</label>
+                <input type="password" id="userPassword" [(ngModel)]="userPassword" name="password" required />
+            </div>
+
+            <button type="submit">Actualizar</button>
+        </form>
+    </div>
+
     <!-- Mostrar botones de refrescar token y cerrar sesión si está autenticado -->
     <div *ngIf="authService.isAuthenticated()">
         <button (click)="refreshToken()">Refrescar token</button> <!-- Redirige a la ruta /dashboard -->
         <button (click)="logout()">Cerrar sesión</button>
+        <button (click)="eliminarCuenta()" class="btn-eliminar">Eliminar cuenta</button>
     </div>
 
     <!-- Botones que se muestran solo si el usuario está logeado. Permite gestionar y ver sus inscripciones y reservas-->

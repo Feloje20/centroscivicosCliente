@@ -4,10 +4,22 @@
   <button class="back-button" (click)="goBack()">Volver</button>
 
   <h2 class="titulo">Lista de Actividades</h2>
+
+  <!-- Buscador de actividades -->
+  <div class="buscador-container">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="filtrarActividades()"
+      placeholder="Buscar actividad..."
+      class="buscador-input"
+    />
+  </div>
+
   <!-- Si hay actividades disponibles, mostrar en una lista -->
   <div *ngIf="actividades.length > 0">
     <ul class="actividades-lista">
-      <li *ngFor="let actividad of actividades" class="actividad-item">
+      <li *ngFor="let actividad of filteredActividades" class="actividad-item">
         <div class="actividad-header">
           <strong class="actividad-nombre">{{ actividad.nombre }}</strong>
           <span class="actividad-plazas">Plazas: {{ actividad.plaza }}</span>

@@ -108,3 +108,19 @@ button:hover {
 .back-button:hover {
   background-color: #cd4c4c;
 }
+
+/* Estilo para el contenedor del buscador */
+.buscador-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.buscador-input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto;
+}
