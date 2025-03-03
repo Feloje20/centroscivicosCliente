@@ -1,26 +1,36 @@
-<div *ngIf="isLoading">Cargando actividades...</div>
+<div *ngIf="isLoading" class="loading-message">Cargando actividades...</div>
 
-<div *ngIf="!isLoading">
-  <h2>Lista de Actividades</h2>
+<div *ngIf="!isLoading" class="actividades-container">
+  <button class="back-button" (click)="goBack()">Volver</button>
 
+  <h2 class="titulo">Lista de Actividades</h2>
   <!-- Si hay actividades disponibles, mostrar en una lista -->
   <div *ngIf="actividades.length > 0">
-    <ul>
-      <li *ngFor="let actividad of actividades">
-        <strong>{{ actividad.nombre }}</strong> - {{ actividad.descripcion }}
-        <br>Fecha: {{ actividad.fecha_inicio }} - {{ actividad.fecha_final }}
-        <br>Horario: {{ actividad.horario }} - Plazas: {{ actividad.plaza }}
+    <ul class="actividades-lista">
+      <li *ngFor="let actividad of actividades" class="actividad-item">
+        <div class="actividad-header">
+          <strong class="actividad-nombre">{{ actividad.nombre }}</strong>
+          <span class="actividad-plazas">Plazas: {{ actividad.plaza }}</span>
+        </div>
+        <div class="actividad-fecha-horario">
+          <p>Fecha: {{ actividad.fecha_inicio }} - {{ actividad.fecha_final }}</p>
+          <p>Horario: {{ actividad.horario }}</p>
+        </div>
+        <p class="actividad-descripcion">{{ actividad.descripcion }}</p>
+        <button *ngIf="authService.isAuthenticated()" (click)="inscribirse(actividad.id)">
+          Inscribirse
+        </button>
       </li>
     </ul>
   </div>
 
   <!-- Si no hay actividades, mostrar un mensaje -->
-  <div *ngIf="actividades.length === 0">
+  <div *ngIf="actividades.length === 0" class="no-actividades">
     <p>No hay actividades disponibles.</p>
   </div>
 
   <!-- Mostrar mensaje de error si hubo un problema -->
-  <div *ngIf="errorMessage" style="color: red;">
+  <div *ngIf="errorMessage" class="error-message">
     <p>{{ errorMessage }}</p>
   </div>
 </div>

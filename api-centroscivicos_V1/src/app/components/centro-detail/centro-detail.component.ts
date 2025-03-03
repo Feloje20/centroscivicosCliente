@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; // Para acceder a los parámetros de la URL
+import { ActivatedRoute, Router } from '@angular/router'; // Para acceder a los parámetros de la URL y para la navegación
 import { CentroService } from '../../services/centro.service';
 import { CommonModule } from '@angular/common';
+import { GuardaIdsService } from '../../services/guarda-ids.service';
+import { AuthService } from '../../services/auth.service';
+import { Location } from '@angular/common'; // Importamos Location
 
 @Component({
   selector: 'app-centro-detail',
   templateUrl: './centro-detail.component.html',
   styleUrls: ['./centro-detail.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule],
+  providers: [AuthService]
 })
 export class CentroDetailComponent implements OnInit {
   centro: any = {}; // Guardaremos los detalles del centro aquí
@@ -17,7 +21,11 @@ export class CentroDetailComponent implements OnInit {
 
   constructor(
     private centroService: CentroService,
-    private route: ActivatedRoute  // Para acceder al id del centro en la URL
+    private guardaIdsService: GuardaIdsService,
+    public authService: AuthService,
+    private route: ActivatedRoute,  // Para acceder al id del centro en la URL
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -41,5 +49,24 @@ export class CentroDetailComponent implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  inscribirse(idActividad: number) {
+    // Guardar el id de la actividad en el servicio
+    this.guardaIdsService.setIdActividad(idActividad);
+    // Redirigir a la vista de inscripción
+    this.router.navigate(['/inscripcion']);
+  }
+
+  reservar(idInstalacion: number) {
+    // Guardar el id de la instalación en el servicio
+    this.guardaIdsService.setIdInstalacion(idInstalacion);
+    // Redirigir a la vista de reserva
+    this.router.navigate(['/reserva']);
+  }
+
+  // Método para ir a la página anterior
+  goBack(): void {
+    this.location.back();  // Vuelve a la página anterior
   }
 }

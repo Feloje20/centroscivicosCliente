@@ -1,17 +1,30 @@
-<div *ngIf="errorMessage" style="color: red;">
+<div *ngIf="errorMessage" class="error-message">
   <p>{{ errorMessage }}</p>
 </div>
 
-<div *ngIf="reservas.length === 0">
+<h2>Mis reservas</h2>
+
+<div *ngIf="reservas.length === 0" class="no-reservas">
   <p>No tienes reservas.</p>
 </div>
 
-<div *ngIf="reservas.length > 0">
-  <ul>
-    <li *ngFor="let reserva of reservas">
-      <p>{{ reserva.nombre }}</p>
-      <p>{{ reserva.fecha_inicio }} - {{ reserva.fecha_final }}</p>
-      <button (click)="cancelarReserva(reserva.id)">Cancelar Reserva</button>
+<div *ngIf="reservas.length > 0" class="reservas-container">
+  <ul class="reservas-list">
+    <li *ngFor="let reserva of reservas" class="reserva-item">
+      <p class="reserva-nombre">{{ reserva.instalacion[0].nombre }}</p>
+      <p class="reserva-fecha">{{ reserva.fecha_inicio }} - {{ reserva.fecha_final }}</p>
+      
+      <!-- Nombre de la instalación y centro -->
+      <p class="instalacion-nombre">Nombre reserva: {{ reserva.nombre }}</p>
+      <!-- Enlace al centro -->
+      <p class="centro-nombre">
+        Centro: 
+        <a [routerLink]="['/centros', reserva.instalacion[0].centro[0].id]" class="centro-enlace">
+          {{ reserva.instalacion[0].centro[0].nombre }}
+        </a>
+      </p>
+      
+      <button class="cancel-button" (click)="cancelarReserva(reserva.id)">Cancelar Reserva</button>
     </li>
   </ul>
 </div>

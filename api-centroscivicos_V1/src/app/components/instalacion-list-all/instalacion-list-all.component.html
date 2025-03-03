@@ -1,25 +1,35 @@
-<div *ngIf="isLoading">Cargando instalaciones...</div>
+<div *ngIf="isLoading" class="loading-message">Cargando instalaciones...</div>
 
-<div *ngIf="!isLoading">
-  <h2>Lista de Instalaciones</h2>
+<div *ngIf="!isLoading" class="instalaciones-container">
+  <button class="back-button" (click)="goBack()">Volver</button>
+  
+  <h2 class="titulo">Lista de Instalaciones</h2>
 
   <!-- Si hay instalaciones disponibles, mostrar en una lista -->
   <div *ngIf="instalaciones.length > 0">
-    <ul>
-      <li *ngFor="let instalacion of instalaciones">
-        <strong>{{ instalacion.nombre }}</strong> - {{ instalacion.descripcion }}
-        <br>Capacidad máxima: {{ instalacion.capacidad_maxima }}
+    <ul class="instalaciones-lista">
+      <li *ngFor="let instalacion of instalaciones" class="instalacion-item">
+        <div class="instalacion-header">
+          <strong class="instalacion-nombre">{{ instalacion.nombre }}</strong>
+        </div>
+        <div class="instalacion-details">
+          <p><strong>Descripción:</strong> {{ instalacion.descripcion }}</p>
+          <p><strong>Capacidad máxima:</strong> {{ instalacion.capacidad_maxima }}</p>
+        </div>
+        <button *ngIf="authService.isAuthenticated()" (click)="reservar(instalacion.id)">
+          Reservar
+        </button>
       </li>
     </ul>
   </div>
 
   <!-- Si no hay instalaciones, mostrar un mensaje -->
-  <div *ngIf="instalaciones.length === 0">
+  <div *ngIf="instalaciones.length === 0" class="no-instalaciones">
     <p>No hay instalaciones disponibles.</p>
   </div>
 
   <!-- Mostrar mensaje de error si hubo un problema -->
-  <div *ngIf="errorMessage" style="color: red;">
+  <div *ngIf="errorMessage" class="error-message">
     <p>{{ errorMessage }}</p>
   </div>
 </div>

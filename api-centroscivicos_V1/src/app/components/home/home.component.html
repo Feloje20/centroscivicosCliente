@@ -7,7 +7,10 @@
     <p *ngIf="!authService.isAuthenticated()">Esta es la página de inicio.</p>
 
     <!-- Mostrar botón de login si no está autenticado -->
-    <button *ngIf="!authService.isAuthenticated()" [routerLink]="['/login']">Iniciar sesión</button>
+     <div *ngIf="!authService.isAuthenticated()">
+        <button [routerLink]="['/login']">Iniciar sesión</button>
+        <button [routerLink]="['/register']">Registrarse</button>
+    </div>
 
     <!-- Mostrar botones de refrescar token y cerrar sesión si está autenticado -->
     <div *ngIf="authService.isAuthenticated()">
@@ -16,7 +19,7 @@
     </div>
 
     <!-- Botones que se muestran solo si el usuario está logeado. Permite gestionar y ver sus inscripciones y reservas-->
-     <h2>Inscripciones y reservas</h2>
+    <h2 *ngIf="authService.isAuthenticated()">Inscripciones y reservas</h2>
     <div *ngIf="authService.isAuthenticated()">
         <button [routerLink]="['/inscripciones']">Ver inscripciones</button> <!-- Redirige a la ruta /inscripciones -->
         <button [routerLink]="['/reservas']">Ver reservas</button> <!-- Redirige a la ruta /reservas -->

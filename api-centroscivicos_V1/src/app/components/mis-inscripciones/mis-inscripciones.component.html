@@ -1,20 +1,43 @@
 <h2>Mis inscripciones</h2>
 
-<div *ngIf="inscripciones.length > 0; else noInscripciones">
-    <ul>
-      <li *ngFor="let inscripcion of inscripciones">
-        <p><strong>Nombre:</strong> {{ inscripcion.nombre }}</p>
-        <p><strong>Correo:</strong> {{ inscripcion.correo }}</p>
-        <p><strong>Teléfono:</strong> {{ inscripcion.telefono }}</p>
-        <p><strong>Estado:</strong> {{ inscripcion.estado }}</p>
-        <p><strong>Fecha Inscripción:</strong> {{ inscripcion.fecha_inscripcion }}</p>
-        
-        <!-- Botón para eliminar la inscripción -->
-        <button (click)="eliminarInscripcion(inscripcion.id)">Eliminar</button>
-      </li>
-    </ul>
+<div *ngIf="inscripciones.length > 0; else noInscripciones" class="inscripciones-container">
+  <div *ngFor="let inscripcion of inscripciones" class="inscripcion-card">
+    
+    <div class="inscripcion-header">
+      <h3>{{ inscripcion.nombre }}</h3>
+      <span class="estado">{{ inscripcion.estado }}</span>
+    </div>
+
+    <div class="inscripcion-info">
+      <p><strong>Correo:</strong> {{ inscripcion.correo }}</p>
+      <p><strong>Teléfono:</strong> {{ inscripcion.telefono }}</p>
+      <p><strong>Fecha Inscripción:</strong> {{ inscripcion.fecha_inscripcion | date:'dd/MM/yyyy' }}</p>
+    </div>
+
+    <div class="actividad-info">
+      <p><strong>Actividad:</strong> {{ inscripcion.actividad?.[0]?.nombre || 'Actividad no disponible' }}</p>
+      <p><strong>Descripción de la actividad:</strong> {{ inscripcion.actividad?.[0]?.descripcion || 'Descripción no disponible' }}</p>
+      <p><strong>Horario:</strong> {{ inscripcion.actividad?.[0]?.horario || 'Horario no disponible' }}</p>
+    </div>
+
+    <div class="centro-info">
+      <p><strong>Centro:</strong>
+        <a *ngIf="inscripcion.actividad?.[0]?.centro?.[0]?.id" 
+           [routerLink]="['/centros', inscripcion.actividad[0].centro[0].id]" 
+           class="centro-enlace">
+          {{ inscripcion.actividad?.[0]?.centro?.[0]?.nombre }}
+        </a>
+        <span *ngIf="!inscripcion.actividad?.[0]?.centro?.[0]?.id">Centro no disponible</span>
+      </p>
+    </div>
+
+    <div class="inscripcion-footer">
+      <button (click)="eliminarInscripcion(inscripcion.id)">Eliminar</button>
+    </div>
+    
   </div>
-  
-  <ng-template #noInscripciones>
-    <p>No tienes inscripciones.</p>
-  </ng-template>
+</div>
+
+<ng-template #noInscripciones>
+  <p>No tienes inscripciones.</p>
+</ng-template>

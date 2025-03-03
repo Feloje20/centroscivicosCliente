@@ -1,43 +1,63 @@
-<div *ngIf="isLoading">Cargando detalles del centro...</div>
+<div *ngIf="isLoading" class="centro-detalles">
+  Cargando detalles del centro...
+</div>
 
-<div *ngIf="!isLoading">
-  <h2>Detalles del Centro Cívico</h2>
+<div *ngIf="!isLoading" class="centro-detalles">
+  <button class="back-button" (click)="goBack()">Volver</button>
+  <!-- Tarjeta para mostrar los detalles generales del centro -->
+  <div class="centro-card">
+    <!-- Información General del Centro -->
+    <div *ngIf="centro" class="centro-info">
+      <h2>{{ centro.nombre }}</h2>
+      <p><strong>Dirección:</strong> {{ centro.direccion }}</p>
+      <p><strong>Teléfono:</strong> {{ centro.telefono }}</p>
+      <p><strong>Horario:</strong> {{ centro.horario }}</p>
+    </div>
 
-  <!-- Información General del Centro -->
-  <div *ngIf="centro">
-    <p><strong>Nombre:</strong> {{ centro.nombre }}</p>
-    <p><strong>Dirección:</strong> {{ centro.direccion }}</p>
-    <p><strong>Teléfono:</strong> {{ centro.telefono }}</p>
-    <p><strong>Horario:</strong> {{ centro.horario }}</p>
+    <!-- Imagen del Centro -->
+    <div *ngIf="centro.foto" class="centro-imagen">
+      <img [src]="centro.foto" alt="Imagen del Centro" />
+    </div>
   </div>
 
-  <div *ngIf="centro.foto">
-    <img [src]="centro.foto" alt="Imagen del Centro" style="max-width: 100%; height: auto;" />
+  <!-- Bloque de Instalaciones -->
+  <div *ngIf="centro.instalaciones?.length > 0" class="bloque">
+    <h2>Instalaciones</h2>
+    <div class="sub-bloque" *ngFor="let instalacion of centro.instalaciones">
+      <div class="sub-bloque-header">
+        <strong>{{ instalacion.nombre }}</strong>
+      </div>
+      <div class="sub-bloque-body">
+        <p>{{ instalacion.descripcion }}</p>
+        <p><strong>Capacidad:</strong> {{ instalacion.capacidad_maxima }}</p>
+        <button *ngIf="authService.isAuthenticated()" (click)="reservar(instalacion.id)">
+          Reservar
+        </button>
+      </div>
+    </div>
   </div>
 
-  <!-- Instalaciones -->
-  <div *ngIf="centro.instalaciones?.length > 0">
-    <h3>Instalaciones</h3>
-    <ul>
-      <li *ngFor="let instalacion of centro.instalaciones">
-        <strong>{{ instalacion.nombre }}</strong> - {{ instalacion.descripcion }} (Capacidad: {{ instalacion.capacidad_maxima }})
-      </li>
-    </ul>
-  </div>
-
-  <!-- Actividades -->
-  <div *ngIf="centro.actividades?.length > 0">
-    <h3>Actividades</h3>
-    <ul>
-      <li *ngFor="let actividad of centro.actividades">
-        <strong>{{ actividad.nombre }}</strong> - {{ actividad.descripcion }} (Plazas disponibles: {{ actividad.plaza }})
-        <br>
+  <!-- Bloque de Actividades -->
+  <div *ngIf="centro.actividades?.length > 0" class="bloque">
+    <h2>Actividades</h2>
+    <div class="sub-bloque" *ngFor="let actividad of centro.actividades">
+      <div class="sub-bloque-header">
+        <strong>{{ actividad.nombre }}</strong>
+      </div>
+      <div class="sub-bloque-body">
+        <p>{{ actividad.descripcion }}</p>
+        <p><strong>Plazas disponibles:</strong> {{ actividad.plaza }}</p>
         <small>Fecha: {{ actividad.fecha_inicio }} a {{ actividad.fecha_final }} - Horario: {{ actividad.horario }}</small>
-      </li>
-    </ul>
+        <br>
+        <button *ngIf="authService.isAuthenticated()" (click)="inscribirse(actividad.id)">
+          Inscribirse
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="errorMessage" style="color: red;">
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="error-message">
     <p>{{ errorMessage }}</p>
   </div>
 </div>

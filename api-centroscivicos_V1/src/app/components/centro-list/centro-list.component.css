@@ -1,0 +1,80 @@
+/* Contenedor superior para alinear el botón y los mensajes */
+.header-container {
+  display: flex;
+  flex-direction: column;  /* Coloca los elementos en columna */
+  align-items: center;     /* Alinea al centro horizontalmente */
+  margin-top: 20px;        /* Da un pequeño margen desde el borde superior */
+}
+
+/* Estilo para el botón de volver */
+.back-button {
+  background-color: #f16464;
+  color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #cd4c4c;
+}
+
+/* Estilo para el mensaje de error */
+.error {
+  color: red;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Estilo para el mensaje cuando no hay centros */
+.mensaje-no-centros {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 20px;
+}
+
+/* Lista de centros */
+.lista-centros {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+/* Estilo para cada centro */
+.centro-item {
+  background: #f8f9fa;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.centro-item:hover {
+  transform: scale(1.02);
+}
+
+/* Estilo para la información del centro */
+.centro-nombre {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.centro-direccion,
+.centro-telefono,
+.centro-horario {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.centro-link {
+  cursor: pointer;
+}

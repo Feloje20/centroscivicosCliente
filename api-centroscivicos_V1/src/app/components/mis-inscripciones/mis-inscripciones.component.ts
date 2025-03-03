@@ -1,20 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { InscripcionService } from '../../services/inscripcion.service'; // Asegúrate de que el servicio esté correctamente importado
+import { Router } from '@angular/router'; // Para la navegación si es necesario
 import { CommonModule } from '@angular/common'; // Importar CommonModule
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
+import { RouterModule } from '@angular/router';  // Importar RouterModule
 
 @Component({
   selector: 'app-mis-inscripciones',
   templateUrl: './mis-inscripciones.component.html',
   styleUrls: ['./mis-inscripciones.component.css'],
   standalone: true,
-    imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, RouterModule ]
 })
 
 export class MisInscripcionesComponent implements OnInit {
   inscripciones: any[] = []; // Aquí almacenaremos las inscripciones del usuario
 
-  constructor(private inscripcionService: InscripcionService) {}
+  constructor(
+    private inscripcionService: InscripcionService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.obtenerInscripciones(); // Llamamos al método para obtener las inscripciones

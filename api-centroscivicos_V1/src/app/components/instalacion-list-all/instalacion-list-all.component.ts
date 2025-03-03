@@ -1,20 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router'; // Para acceder a los parámetros de la URL y para la navegación
 import { CentroService } from '../../services/centro.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { GuardaIdsService } from '../../services/guarda-ids.service';
+import { Location } from '@angular/common'; // Importamos Location
 
 @Component({
   selector: 'app-instalacion-list-all',
   templateUrl: './instalacion-list-all.component.html',
   styleUrls: ['./instalacion-list-all.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule],
+  providers: [AuthService]
 })
 export class InstalacionListAllComponent implements OnInit {
   instalaciones: any[] = []; // Lista de todas las instalaciones
   errorMessage: string = '';
   isLoading: boolean = true;
 
-  constructor(private centroService: CentroService) {}
+  constructor(
+    private centroService: CentroService,
+    public authService: AuthService,
+    private guardaIdsService: GuardaIdsService,
+    private router: Router,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
     this.getInstalaciones();
@@ -34,4 +45,17 @@ export class InstalacionListAllComponent implements OnInit {
       }
     });
   }
+
+  reservar(idInstalacion: number) {
+    // Guardar el id de la instalación en el servicio
+    this.guardaIdsService.setIdInstalacion(idInstalacion);
+    // Redirigir a la vista de reserva
+    this.router.navigate(['/reserva']);
+  }
+
+  // Método para ir a la página anterior
+  goBack(): void {
+    this.location.back();  // Vuelve a la página anterior
+  }
+
 }

@@ -1,0 +1,106 @@
+/* Contenedor principal para centrar todo */
+.centro-detalles {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Tarjeta principal del centro */
+.centro-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fafafa;
+  margin-bottom: 20px;
+  width: 80%; /* Ajusta el ancho para centrar */
+  max-width: 800px; /* Establece un tamaño máximo */
+}
+
+/* Título de la tarjeta */
+.centro-card h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+/* Información del centro */
+.centro-info p {
+  margin: 5px 0;
+}
+
+/* Imagen del centro */
+.centro-imagen img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Bloques de instalaciones y actividades */
+.bloque {
+  margin-top: 20px;
+  width: 80%; /* Ajusta el ancho para centrar */
+  max-width: 800px; /* Establece un tamaño máximo */
+}
+
+/* Sub-bloques de instalaciones y actividades */
+.sub-bloque {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: left; /* Asegura que el texto se alinee a la izquierda dentro del sub-bloque */
+}
+
+/* Cabecera de los sub-bloques */
+.sub-bloque-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Cuerpo de los sub-bloques */
+.sub-bloque-body p {
+  margin: 10px 0;
+}
+
+/* Botones */
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Estilo para el botón de volver */
+.back-button {
+  background-color: #f16464;
+  color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #cd4c4c;
+}

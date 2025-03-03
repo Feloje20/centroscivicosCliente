@@ -1,32 +1,33 @@
+<h2> Nueva inscripción</h2>
+
 <form (ngSubmit)="crearInscripcion()">
-    <div>
-      <label for="nombre">Nombre</label>
-      <input id="nombre" type="text" [(ngModel)]="inscripcion.nombre" name="nombre" required>
-    </div>
-  
-    <div>
-      <label for="telefono">Teléfono</label>
-      <input id="telefono" type="text" [(ngModel)]="inscripcion.telefono" name="telefono" required>
-    </div>
-  
-    <div>
-      <label for="id_actividad">ID Actividad</label>
-      <input id="id_actividad" type="number" [(ngModel)]="inscripcion.id_actividad" name="id_actividad" required>
-    </div>
-  
-    <div>
-      <label for="fecha_inscripcion">Fecha de inscripción</label>
-      <input id="fecha_inscripcion" type="datetime-local" [(ngModel)]="inscripcion.fecha_inscripcion" name="fecha_inscripcion" required>
-    </div>
-  
-    <div>
-      <label for="estado">Estado</label>
-      <select id="estado" [(ngModel)]="inscripcion.estado" name="estado" required>
-        <option value="pendiente">Pendiente</option>
-        <option value="confirmada">Confirmada</option>
-        <option value="cancelada">Cancelada</option>
-      </select>
-    </div>
-  
-    <button type="submit">Crear Inscripción</button>
-  </form>
+  <!-- Nombre -->
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" [(ngModel)]="inscripcion.nombre" name="nombre" required
+           minlength="3" pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" 
+           aria-label="Nombre del participante">
+  </div>
+
+  <!-- Teléfono -->
+  <div class="form-group">
+    <label for="telefono">Teléfono</label>
+    <input id="telefono" type="tel" [(ngModel)]="inscripcion.telefono" name="telefono" required
+           pattern="^[0-9]{9,15}$" 
+           aria-label="Número de teléfono válido">
+  </div>
+
+  <!-- Fecha de inscripción -->
+  <div class="form-group">
+    <label for="fecha_inscripcion">Fecha de inscripción</label>
+    <input id="fecha_inscripcion" type="datetime-local" [(ngModel)]="inscripcion.fecha_inscripcion"
+           name="fecha_inscripcion" required 
+           aria-label="Fecha en la que se realiza la inscripción">
+  </div>
+
+  <!-- Botón de Envío -->
+  <div class="form-buttons">
+    <button type="submit" class="submit-button">Crear Inscripcion</button>
+    <button type="button" class="back-button" (click)="goBack()">Volver</button>
+  </div>
+</form>

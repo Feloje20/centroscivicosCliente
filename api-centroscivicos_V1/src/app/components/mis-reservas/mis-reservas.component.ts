@@ -3,13 +3,14 @@ import { ReservaService } from '../../services/reserva.service'; // Importa el s
 import { Router } from '@angular/router'; // Para la navegación si es necesario
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';  // Importar RouterModule
 
 @Component({
   selector: 'app-mis-reservas',
   templateUrl: './mis-reservas.component.html',
   styleUrls: ['./mis-reservas.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, RouterModule ]
 })
 export class MisReservasComponent implements OnInit {
   reservas: any[] = [];  // Array donde se almacenarán las reservas
@@ -27,6 +28,7 @@ export class MisReservasComponent implements OnInit {
   cargarMisReservas() {
     this.reservaService.obtenerReservas().subscribe(
       (data: any[]) => {
+        console.log(data);
         this.reservas = data;
       },
       (error) => {

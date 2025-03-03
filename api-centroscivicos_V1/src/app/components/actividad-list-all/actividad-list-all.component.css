@@ -1,0 +1,129 @@
+/* Mensaje de carga */
+.loading-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #007bff;
+    margin-top: 20px;
+  }
+  
+  /* Contenedor principal de actividades */
+  .actividades-container {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  /* Título principal */
+  .titulo {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Lista de actividades */
+  .actividades-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Estilo para cada actividad */
+  .actividad-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .actividad-item:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Encabezado de la actividad (nombre y plazas) */
+  .actividad-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .actividad-nombre {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .actividad-plazas {
+    font-size: 1.1rem;
+    color: #555;
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  /* Fecha y horario */
+  .actividad-fecha-horario {
+    font-size: 1rem;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .actividad-fecha-horario p {
+    margin: 5px 0;
+  }
+  
+  /* Descripción de la actividad */
+  .actividad-descripcion {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  /* Mensaje cuando no hay actividades */
+  .no-actividades {
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 20px;
+  }
+  
+  /* Estilo para mensaje de error */
+  .error-message {
+    color: red;
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+
+  /* Estilo para el botón de volver */
+.back-button {
+  background-color: #f16464;
+  color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #cd4c4c;
+}
+
+/* Botones */
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

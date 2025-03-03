@@ -1,0 +1,103 @@
+h2 {
+    text-align: center;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Mensaje cuando no hay reservas */
+  .no-reservas {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 20px;
+  }
+  
+  /* Contenedor de reservas */
+  .reservas-container {
+    margin-top: 30px;
+    padding: 0 15px;
+  }
+  
+  /* Lista de reservas */
+  .reservas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Estilo para cada reserva */
+  .reserva-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .reserva-item:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Nombre de la reserva */
+  .reserva-nombre {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  /* Fechas de la reserva */
+  .reserva-fecha {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  /* Botón de cancelar reserva */
+  .cancel-button {
+    background-color: #f16464;
+    color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cancel-button:hover {
+    background-color: #cd4c4c;
+  }
+
+  /* Estilo del enlace */
+.centro-enlace {
+  color: #007bff; /* Color de texto azul */
+  text-decoration: none; /* Quitar subrayado predeterminado */
+  font-weight: bold; /* Hacer el texto en negrita */
+  padding: 5px 10px; /* Añadir padding para mejorar la apariencia */
+  border-radius: 5px; /* Bordes redondeados */
+  transition: all 0.3s ease; /* Añadir transición suave para efectos */
+}
+
+/* Estilo al pasar el ratón (hover) */
+.centro-enlace:hover {
+  background-color: #f0f0f0; /* Fondo suave cuando pasas el ratón */
+  color: #0056b3; /* Cambiar el color de texto a un azul más oscuro */
+  text-decoration: underline; /* Subrayar el texto al pasar el ratón */
+  transform: scale(1.05); /* Efecto de aumentar tamaño ligeramente */
+}
+
+/* Estilo cuando el enlace está activo (clicado) */
+.centro-enlace:active {
+  transform: scale(0.98); /* Efecto de reducir el tamaño al hacer clic */
+  color: #004085; /* Cambiar el color del texto cuando se hace clic */
+}

@@ -3,6 +3,8 @@ import { ReservaService } from '../../services/reserva.service'; // Servicio par
 import { Router } from '@angular/router'; // Para redirigir después de crear la reserva
 import { CommonModule } from '@angular/common'; // Importar CommonModule
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
+import { GuardaIdsService } from '../../services/guarda-ids.service';
+import { Location } from '@angular/common'; // Importamos Location
 
 @Component({
   selector: 'app-nueva-reserva',
@@ -13,39 +15,38 @@ import { FormsModule } from '@angular/forms'; // Importar FormsModule
 })
 export class NuevaReservaComponent {
   reserva = {
-    id_instalacion: '1',
+    id_instalacion: '',
     nombre: '',
     telefono: '',
     fecha_inicio: '',
     fecha_final: '',
-    estado: ''
+    estado: 'pendiente'
   };
+  idInstalacion: number | null = null;
 
   constructor(
     private reservaService: ReservaService,
+    private guardaIdsService: GuardaIdsService,
+    private location: Location, // Inyectamos Location
     private router: Router
-  ) {}
+  ) {
+    // Obtener el id de la instalación desde el servicio
+    this.idInstalacion = this.guardaIdsService.getIdInstalacion();
+    if (this.idInstalacion) {
+      this.reserva.id_instalacion = this.idInstalacion.toString();
+    }
+  }
 
   crearReserva() {
-    // Si las fechas son solo 'YYYY-MM-DD', añadir la hora predeterminada '00:00:00'
-    const fechaInicio = new Date(this.reserva.fecha_inicio);
-    const fechaFinal = new Date(this.reserva.fecha_final);
-
-    // Asegúrate de que las fechas sean válidas
-    if (isNaN(fechaInicio.getTime()) || isNaN(fechaFinal.getTime())) {
-      console.error('Las fechas no son válidas');
-      return;
-    }
-
-    this.reserva.fecha_inicio = `${fechaInicio.getFullYear()}-${('0' + (fechaInicio.getMonth() + 1)).slice(-2)}-${('0' + fechaInicio.getDate()).slice(-2)} 00:00:00`;
-    this.reserva.fecha_final = `${fechaFinal.getFullYear()}-${('0' + (fechaFinal.getMonth() + 1)).slice(-2)}-${('0' + fechaFinal.getDate()).slice(-2)} 00:00:00`;
-
-    console.log(JSON.stringify(this.reserva, null, 2));
-
     // Enviar la reserva con las fechas completas
     this.reservaService.crearReserva(this.reserva).subscribe(() => {
       // Redirigir o mostrar mensaje de éxito
       this.router.navigate(['/reservas']);  // Volver a la vista de reservas
     });
+  }
+
+  // Método para ir a la página anterior
+  goBack(): void {
+    this.location.back();  // Vuelve a la página anterior
   }
 }

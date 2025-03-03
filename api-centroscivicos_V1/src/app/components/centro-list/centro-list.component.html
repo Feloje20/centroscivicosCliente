@@ -1,13 +1,21 @@
-<div *ngIf="errorMessage" class="error">
+<div class="header-container">
+  <button class="back-button" (click)="goBack()">Volver</button>
+
+  <div *ngIf="errorMessage" class="error">
     {{ errorMessage }}
   </div>
-  
-  <div *ngIf="centros.length === 0">
+
+  <div *ngIf="centros.length === 0" class="mensaje-no-centros">
     No se encontraron centros.
   </div>
+</div>
+
+<ul *ngIf="centros.length > 0" class="lista-centros">
+  <li *ngFor="let centro of centros" class="centro-item centro-link" [routerLink]="['/centros/', centro.id]">
+    <h2 class="centro-nombre">{{ centro.nombre }}</h2>
+    <p class="centro-direccion"><strong>Dirección:</strong> {{ centro.direccion }}</p>
+    <p class="centro-telefono"><strong>Teléfono:</strong> {{ centro.telefono }}</p>
+    <p class="centro-horario"><strong>Horario:</strong> {{ centro.horario }}</p>
+  </li>
+</ul>
   
-  <ul *ngIf="centros.length > 0">
-    <li *ngFor="let centro of centros">
-      {{ centro.nombre }} - {{ centro.direccion }}
-    </li>
-  </ul>
