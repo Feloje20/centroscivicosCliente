@@ -14,4 +14,19 @@
         <button (click)="refreshToken()">Refrescar token</button> <!-- Redirige a la ruta /dashboard -->
         <button (click)="logout()">Cerrar sesión</button>
     </div>
+
+    <!-- Botones que se muestran solo si el usuario está logeado. Permite gestionar y ver sus inscripciones y reservas-->
+     <h2>Inscripciones y reservas</h2>
+    <div *ngIf="authService.isAuthenticated()">
+        <button [routerLink]="['/inscripciones']">Ver inscripciones</button> <!-- Redirige a la ruta /inscripciones -->
+        <button [routerLink]="['/reservas']">Ver reservas</button> <!-- Redirige a la ruta /reservas -->
+    </div>
+
+    <!-- Mostrar botón para ver centros, instalaciones y actividades. SECCIÓN PÚBLICA-->
+    <div>
+        <h2>Sección pública</h2>
+        <button [routerLink]="['/centros']">Ver centros</button> <!-- Redirige a la ruta /centros -->
+        <button [routerLink]="['/instalaciones']">Ver instalaciones</button> <!-- Redirige a la ruta /instalaciones -->
+        <button [routerLink]="['/actividades']">Ver actividades</button> <!-- Redirige a la ruta /actividades -->
+    </div>
 </section>
