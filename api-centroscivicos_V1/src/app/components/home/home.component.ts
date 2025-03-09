@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';  // Importar RouterModule
 import { CommonModule } from '@angular/common';  // Importar CommonModule
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';  // Importar FormsModule
+import { CentroService } from '../../services/centro.service';
 
 @Component({
   selector: 'app-home',
@@ -15,74 +16,81 @@ import { FormsModule } from '@angular/forms';  // Importar FormsModule
 export class HomeComponent implements OnInit{
   userName: string = '';
   userEmail: string = '';
-  userPassword: string = ''; // Agregamos el campo de password
+  userPassword: string = ''; 
+  centros: any[] = [];
+  instalaciones: any[] = [];
+  isLoading: boolean = true;
+  errorMessage: string = '';
+  searchQuery: string = '';
+  filteredInstalaciones: any[] = [];
+  actividades: any[] = []; // Lista de todas las actividades
+  filteredActividades: any[] = [];
 
   constructor(
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private centroService: CentroService
   ) {}
 
   ngOnInit(): void {
-    const user = this.authService.getUserDetails();
+    this.getInstalaciones();
+    this.getCentros();
+    this.getActividades();
+
     // Llamar a getUserEmail() solo una vez al inicio
+    const user = this.authService.getUserDetails();
     this.userEmail = user.email;
     this.userName = user.usuario;
   }
-  
-  // Método para manejar logout
-  logout() {
-    this.authService.logout();
-  }
 
-  // Método para manejar refresco de token
-  refreshToken() {
-    this.authService.refreshToken().subscribe(
-      () => alert('Token refrescado con éxito'),
-      () => alert('Error refrescando token')
-    );
-  }
-
-  // Llamada al método para eliminar la cuenta
-  eliminarCuenta(): void {
-    if (confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible.')) {
-      this.authService.deleteAccount().subscribe({
-        next: (response) => {
-          this.authService.logout();
-          console.log('Cuenta eliminada correctamente:', response);
-          // Redirigir al usuario a la página de inicio o login después de eliminar la cuenta
-          this.router.navigate(['/login']);
-        },
-        error: (error) => {
-          console.error('Error al eliminar la cuenta:', error);
-        }
-      });
-    }
-  }
-
-  actualizarUsuario(): void {
-    // Validación de campos
-    if (!this.userName || !this.userEmail || !this.userPassword) {
-      alert('Por favor, rellena todos los campos.');
-      return;
-    }
-
-    const updatedUser = {
-      usuario: this.userName,  // Cambiar 'name' por 'usuario'
-      email: this.userEmail,
-      password: this.userPassword
-    };
-  
-    this.authService.updateUser(updatedUser).subscribe(
-      (response) => {
-        alert('Los datos se han actualizado correctamente.');
-        // Redirigir o realizar alguna acción después de actualizar
+  // Método para recuperar la info de los centros
+  getCentros(): void {
+    this.centroService.getCentros().subscribe({
+      next: (data) => {
+        this.centros = data;
       },
-      (error) => {
-        console.error('Error al actualizar el usuario:', error);
-        alert('Hubo un problema al actualizar los datos. Inténtalo de nuevo más tarde.');
+      error: (err) => {
+        this.errorMessage = 'Error fetching centros data';
+        console.error(err);
       }
-    );
+    });
   }
 
-  
+  // Obtener todas las instalaciones
+  getInstalaciones(): void {
+    this.centroService.getInstalaciones().subscribe({
+      next: (data) => {
+        this.instalaciones = data; // Asignamos la respuesta a instalaciones
+        this.filteredInstalaciones = [...this.instalaciones]; // Asignamos a filteredActividades después de cargar
+        this.isLoading = false; // Ya terminamos de cargar
+      },
+      error: (err) => {
+        this.errorMessage = 'Error fetching instalaciones';
+        this.isLoading = false; // Ya terminamos de cargar
+        console.error(err);
+      }
+    });
+  }
+
+  // Obtener todas las actividades
+  getActividades(): void {
+    this.centroService.getActividades().subscribe({
+      next: (data) => {
+        this.actividades = data; // Asignamos la respuesta a actividades
+        this.filteredActividades = [...this.actividades]; // Asignamos a filteredActividades después de cargar
+        this.isLoading = false; // Ya terminamos de cargar
+      },
+      error: (err) => {
+        this.errorMessage = 'Error fetching actividades';
+        this.isLoading = false; // Ya terminamos de cargar
+        console.error(err);
+      }
+    });
+  }
+
+   // Función para obtener el nombre del centro correspondiente al id_centro
+   getCentroName(idCentro: number): string {
+    const centro = this.centros.find(c => c.id === idCentro);
+    return centro ? centro.nombre : 'Centro no encontrado';
+  }
 }

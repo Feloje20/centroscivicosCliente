@@ -1,8 +1,6 @@
 <div *ngIf="isLoading" class="loading-message">Cargando actividades...</div>
 
 <div *ngIf="!isLoading" class="actividades-container">
-  <button class="back-button" (click)="goBack()">Volver</button>
-
   <h2 class="titulo">Lista de Actividades</h2>
 
   <!-- Buscador de actividades -->
@@ -29,6 +27,16 @@
           <p>Horario: {{ actividad.horario }}</p>
         </div>
         <p class="actividad-descripcion">{{ actividad.descripcion }}</p>
+        <div>
+          <p><strong>Centro: </strong>
+            <a *ngIf="actividad.id_centro"  
+               [routerLink]="['/centros', actividad.id_centro]" 
+               class="centro-enlace">
+               {{ actividad.centro?.[0]?.nombre }}
+            </a>
+            <span *ngIf="!actividad.id_centro">Centro no disponible</span>
+          </p>
+        </div>     
         <button *ngIf="authService.isAuthenticated()" (click)="inscribirse(actividad.id)">
           Inscribirse
         </button>

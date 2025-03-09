@@ -1,59 +1,56 @@
 <section class="home-container">
-    <h1>API de centros cívicos</h1>
-    <!-- Mostrar mensaje de bienvenida con el correo del usuario si está autenticado -->
-    <p *ngIf="authService.isAuthenticated()">Hola {{ userName }} {{ userEmail }}</p>
-
-    <!-- Mostrar mensaje por defecto si no está autenticado -->
-    <p *ngIf="!authService.isAuthenticated()">Esta es la página de inicio.</p>
-
-    <!-- Mostrar botón de login si no está autenticado -->
-     <div *ngIf="!authService.isAuthenticated()">
-        <button [routerLink]="['/login']">Iniciar sesión</button>
-        <button [routerLink]="['/register']">Registrarse</button>
+    <h1>Centros Cívicos de Córdoba</h1>
+    <p *ngIf="authService.isAuthenticated()">Bienvenido {{ userName }}</p>
+    <p *ngIf="!authService.isAuthenticated()">Bienvenido invitado</p>
+    
+    <!-- Cuadrícula de Centros -->
+    <div class="grid-container">
+        <h2>Centros Cívicos</h2>
+        <div class="grid">
+        <div *ngFor="let centro of centros" class="card enlace">
+            <!-- Verifica si el usuario está logueado para hacer la tarjeta clickeable -->
+            <a [routerLink]="'/centros/' + centro.id" class="card-link">
+            <h3>{{ centro.nombre }}</h3>
+            <p>Dirección: {{ centro.direccion }}</p>
+            <p>Teléfono: {{ centro.telefono }}</p>
+            </a>
+        </div>
+        </div>
     </div>
-
-    <h2>Actualizar datos</h2>
-
-    <div *ngIf="authService.isAuthenticated()">
-        <form (ngSubmit)="actualizarUsuario()">
-            <div>
-                <label for="userName">Nombre de usuario:</label>
-                <input type="text" id="userName" [(ngModel)]="userName" name="name" required />
-            </div>
-
-            <div>
-                <label for="userEmail">Correo electrónico:</label>
-                <input type="email" id="userEmail" [(ngModel)]="userEmail" name="email" required />
-            </div>
-
-            <div>
-                <label for="userPassword">Contraseña:</label>
-                <input type="password" id="userPassword" [(ngModel)]="userPassword" name="password" required />
-            </div>
-
-            <button type="submit">Actualizar</button>
-        </form>
+  
+    <!-- Cuadrícula de Instalaciones -->
+    <div class="grid-container">
+      <h2>Instalaciones</h2>
+      <div class="grid">
+        <div class="card" *ngFor="let instalacion of instalaciones">
+          <h3>{{ instalacion.nombre }}</h3>
+          <p>Capacidad: {{ instalacion.capacidad_maxima }}</p>
+          <p>Descripción: {{ instalacion.descripcion }}</p>
+          <p><strong>Centro:</strong> 
+            <a [routerLink]="'/centros/' + instalacion.id_centro">
+              {{ getCentroName(instalacion.id_centro) }}
+            </a>
+          </p> 
+        </div>
+      </div>
     </div>
-
-    <!-- Mostrar botones de refrescar token y cerrar sesión si está autenticado -->
-    <div *ngIf="authService.isAuthenticated()">
-        <button (click)="refreshToken()">Refrescar token</button> <!-- Redirige a la ruta /dashboard -->
-        <button (click)="logout()">Cerrar sesión</button>
-        <button (click)="eliminarCuenta()" class="btn-eliminar">Eliminar cuenta</button>
+  
+    <!-- Cuadrícula de Actividades -->
+    <div class="grid-container">
+      <h2>Actividades</h2>
+      <div class="grid">
+        <div class="card" *ngFor="let actividad of actividades">
+          <h3>{{ actividad.nombre }}</h3>
+          <p>Fecha inicio: {{ actividad.fecha_inicio }}</p>
+          <p>Fecha final: {{ actividad.fecha_final }}</p>
+          <p>Horario: {{ actividad.horario }}</p>
+          <p><strong>Centro:</strong> 
+            <a [routerLink]="'/centros/' + actividad.id_centro">
+              {{ getCentroName(actividad.id_centro) }}
+            </a>
+          </p> 
+        </div>
+      </div>
     </div>
-
-    <!-- Botones que se muestran solo si el usuario está logeado. Permite gestionar y ver sus inscripciones y reservas-->
-    <h2 *ngIf="authService.isAuthenticated()">Inscripciones y reservas</h2>
-    <div *ngIf="authService.isAuthenticated()">
-        <button [routerLink]="['/inscripciones']">Ver inscripciones</button> <!-- Redirige a la ruta /inscripciones -->
-        <button [routerLink]="['/reservas']">Ver reservas</button> <!-- Redirige a la ruta /reservas -->
-    </div>
-
-    <!-- Mostrar botón para ver centros, instalaciones y actividades. SECCIÓN PÚBLICA-->
-    <div>
-        <h2>Sección pública</h2>
-        <button [routerLink]="['/centros']">Ver centros</button> <!-- Redirige a la ruta /centros -->
-        <button [routerLink]="['/instalaciones']">Ver instalaciones</button> <!-- Redirige a la ruta /instalaciones -->
-        <button [routerLink]="['/actividades']">Ver actividades</button> <!-- Redirige a la ruta /actividades -->
-    </div>
-</section>
+  </section>
+  

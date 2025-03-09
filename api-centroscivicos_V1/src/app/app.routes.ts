@@ -15,12 +15,14 @@ import { MisReservasComponent } from './components/mis-reservas/mis-reservas.com
 import { NuevaInscripcionComponent } from './components/nueva-inscripcion/nueva-inscripcion.component';
 import { MisInscripcionesComponent } from './components/mis-inscripciones/mis-inscripciones.component';
 import { HomeComponent } from './components/home/home.component';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     // Ruta por defecto
     { path: '', component: HomeComponent },  
     // Rutas de usuario
+    { path: 'editar', component: EditarUsuarioComponent, canActivate: [AuthGuard] },
     // Ruta de login
     {path: 'login', component: UsuarioLoginComponent},
     // Ruta de refresco de token

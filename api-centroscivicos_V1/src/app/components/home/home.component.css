@@ -1,154 +1,96 @@
-/* Estilos generales para el contenedor principal */
-.home-container {
+/* Estilo base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: Arial, sans-serif;
-  max-width: 1000px;
-  margin: 0 auto;
+  background-color: #f4f4f4;
+}
+
+.home-container {
   padding: 20px;
   text-align: center;
 }
 
-/* Títulos */
 h1 {
-  font-size: 2.5rem;
-  color: #333;
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 
-h2 {
-  font-size: 2rem;
+/* Estilo para las cuadrículas */
+.grid-container {
+  margin: 40px 0;
+}
+
+.grid-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
   color: #333;
-  margin: 0;
-  margin-top: 10px;
+  font-weight: 600; /* Un poco de énfasis para el título */
 }
 
-/* Estilos para los párrafos */
-p {
-  font-size: 1.2rem;
-  color: #666;
-  margin: 10px 0;
-}
-
-/* Estilos para el formulario de actualización de usuario */
-form {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  display: inline-block;
-  text-align: left;
-}
-
-form div {
-  margin-bottom: 15px;
-}
-
-form label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-form input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
-}
-
-form input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-}
-
-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #0056b3;
-}
-
-/* Estilos para los botones del usuario autenticado */
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-  color: white;
-}
-
-/* Botón para eliminar cuenta */
-.btn-eliminar {
-  background-color: #dc3545;
-  color: white;
-}
-
-.btn-eliminar:hover {
-  background-color: #c82333;
-}
-
-/* Estilos para los botones en la sección pública */
-div > button {
-  margin-top: 10px;
-  background-color: #28a745;
-}
-
-div > button:hover {
-  background-color: #218838;
-}
-
-/* Aseguramos que todo esté centrado */
-.home-container {
+/* Estilo para el contenedor de las tarjetas usando Flexbox */
+.grid {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;         /* Permite que las tarjetas se acomoden a varias filas */
+  gap: 20px;              /* Espacio entre tarjetas */
+  justify-content: center; /* Centra las tarjetas */
 }
 
-.home-container div, .home-container form {
-  max-width: 600px;
-  width: 100%;
+/* Estilo para las tarjetas */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 250px;            /* Ancho fijo de las tarjetas */
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  text-align: left;      /* Cambia el cursor para indicar que es clickeable */
+  overflow: hidden;        /* Para asegurar que el contenido no desborde */
 }
 
-/* Estilos para la visualización de los botones de login/registro */
-button[routerLink] {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  border-radius: 5px;
-  margin: 10px;
-  font-size: 1rem;
-  cursor: pointer;
+.enlace {
+  cursor: pointer;  
 }
 
-button[routerLink]:hover {
-  background-color: #0056b3;
-}
-
-/* Ajustes para el texto de bienvenida */
-p {
+.card h3 {
   font-size: 1.2rem;
-  color: #333;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;        /* Un poco de énfasis para el nombre del centro */
+  color: #333;             /* Color del texto */
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 10px;     /* Espaciado entre párrafos */
+}
+
+/* Efecto para las tarjetas al pasar por encima */
+.card:hover {
+  transform: translateY(-5px); /* Levanta la tarjeta al pasar el ratón */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Enlace dentro de las tarjetas */
+.card-link {
+  text-decoration: none;     /* Quitar el subrayado */
+  color: inherit;            /* Heredar el color de la tarjeta */
+  display: block;            /* Hacer que el enlace ocupe toda la tarjeta */
+  height: 100%;              /* Asegurarse de que el enlace cubra toda la tarjeta */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .grid {
+    justify-content: flex-start; /* Alinea las tarjetas a la izquierda */
+  }
+
+  .card {
+    width: 100%;  /* Las tarjetas ocupan todo el ancho en pantallas pequeñas */
+    margin-bottom: 15px; /* Añadir espacio entre las tarjetas en pantallas pequeñas */
+  }
 }

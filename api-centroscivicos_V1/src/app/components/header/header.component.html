@@ -1,5 +1,20 @@
 <header>
   <nav>
-    <h1><a routerLink="/">Centros cívicos API</a></h1>
+    <h1>Centros Cívicos API</h1>
+    <ul class="nav-links">
+      <li><a routerLink="/">Inicio</a></li>
+      <li><a routerLink="/centros">Centros</a></li>
+      <li><a routerLink="/instalaciones">Instalaciones</a></li>
+      <li><a routerLink="/actividades">Actividades</a></li>
+      <li *ngIf="authService.isAuthenticated()"><a routerLink="/inscripciones">Mis inscripciones</a></li>
+      <li *ngIf="authService.isAuthenticated()"><a routerLink="/reservas">Mis reservas</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <button *ngIf="!authService.isAuthenticated()" routerLink="/login">Iniciar sesión</button>
+      <button *ngIf="!authService.isAuthenticated()" routerLink="/register">Registrarse</button>
+      <button *ngIf="authService.isAuthenticated()" (click)="refreshToken()">Refrescar token</button> <!-- Redirige a la ruta /dashboard -->
+      <button *ngIf="authService.isAuthenticated()" routerLink="/editar">Editar usuario</button>
+      <button *ngIf="authService.isAuthenticated()" (click)="logout()">Cerrar sesión</button>
+    </div>
   </nav>
 </header>

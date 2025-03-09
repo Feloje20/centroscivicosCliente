@@ -1,28 +1,52 @@
 header {
-    background-color: #333;
-    color: white;
-    padding: 15px;
-    text-align: center;
-  }
+  background-color: #333;
+  color: white;
+  padding: 15px;
+}
 
-/* Estilo para el enlace (a) */
-header a {
-  text-decoration: none; /* Elimina el subrayado */
-  color: inherit; /* Hereda el color del texto del <h1> */
-  cursor: pointer; /* Cambia el cursor a mano cuando se pasa por encima */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
   transition: color 0.3s ease;
 }
 
-header a:hover {
-  color: #adcff3; /* Cambia el color cuando el enlace es hover (puedes personalizarlo) */
-  text-decoration: none; /* Asegura que no aparezca el subrayado en el hover */
+.nav-links a:hover {
+  color: #adcff3;
 }
 
-/* Estilo para el <h1> */
-header h1 {
-  margin: 0;
-  padding: 0;
-  font-size: 2.5rem;
-  font-weight: bold;
+.auth-buttons button {
+  background-color: #555;
   color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.auth-buttons button:hover {
+  background-color: #777;
 }

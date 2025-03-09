@@ -6,13 +6,14 @@ import { GuardaIdsService } from '../../services/guarda-ids.service';
 import { AuthService } from '../../services/auth.service';
 import { Location } from '@angular/common'; // Importamos Location
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-actividad-list-all',
   templateUrl: './actividad-list-all.component.html',
   styleUrls: ['./actividad-list-all.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   providers: [AuthService]
 })
 export class ActividadListAllComponent implements OnInit {
@@ -56,11 +57,6 @@ export class ActividadListAllComponent implements OnInit {
     this.guardaIdsService.setIdActividad(idActividad);
     // Redirigir a la vista de inscripción
     this.router.navigate(['/inscripcion']);
-  }
-
-  // Método para ir a la página anterior
-  goBack(): void {
-    this.location.back();  // Vuelve a la página anterior
   }
 
   filtrarActividades(): void {

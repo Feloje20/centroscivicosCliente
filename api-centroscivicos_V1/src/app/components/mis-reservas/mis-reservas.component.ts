@@ -51,9 +51,4 @@ export class MisReservasComponent implements OnInit {
       }
     );
   }
-
-  // Método para ir a la página anterior
-  goBack(): void {
-    this.location.back();  // Vuelve a la página anterior
-  }
 }

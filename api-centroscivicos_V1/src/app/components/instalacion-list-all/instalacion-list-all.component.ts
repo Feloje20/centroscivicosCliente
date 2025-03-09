@@ -6,13 +6,14 @@ import { AuthService } from '../../services/auth.service';
 import { GuardaIdsService } from '../../services/guarda-ids.service';
 import { Location } from '@angular/common'; // Importamos Location
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-instalacion-list-all',
   templateUrl: './instalacion-list-all.component.html',
   styleUrls: ['./instalacion-list-all.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   providers: [AuthService]
 })
 export class InstalacionListAllComponent implements OnInit {
@@ -55,11 +56,6 @@ export class InstalacionListAllComponent implements OnInit {
     this.guardaIdsService.setIdInstalacion(idInstalacion);
     // Redirigir a la vista de reserva
     this.router.navigate(['/reserva']);
-  }
-
-  // Método para ir a la página anterior
-  goBack(): void {
-    this.location.back();  // Vuelve a la página anterior
   }
 
   filtrarInstalaciones(): void {

@@ -1,5 +1,3 @@
-<button class="back-button" (click)="goBack()">Volver</button>
-
 <h2>Mis inscripciones</h2>
 
 <div *ngIf="inscripciones.length > 0; else noInscripciones" class="inscripciones-container">
@@ -22,12 +20,11 @@
       <p><strong>Horario:</strong> {{ inscripcion.actividad?.[0]?.horario || 'Horario no disponible' }}</p>
     </div>
 
-    <div class="centro-info">
-      <p><strong>Centro:</strong>
+    <div>
+      <p><strong>Centro: </strong>
         <a *ngIf="inscripcion.actividad?.[0]?.centro?.[0]?.id" 
            [routerLink]="['/centros', inscripcion.actividad[0].centro[0].id]" 
-           class="centro-enlace">
-          {{ inscripcion.actividad?.[0]?.centro?.[0]?.nombre }}
+           class="centro-enlace">{{ inscripcion.actividad?.[0]?.centro?.[0]?.nombre }}
         </a>
         <span *ngIf="!inscripcion.actividad?.[0]?.centro?.[0]?.id">Centro no disponible</span>
       </p>

@@ -124,3 +124,12 @@ button:hover {
   max-width: 400px;
   margin: 0 auto;
 }
+
+.centro-enlace {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.centro-enlace:hover {
+  text-decoration: underline;
+}

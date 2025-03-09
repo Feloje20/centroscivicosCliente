@@ -1,8 +1,6 @@
 <div *ngIf="isLoading" class="loading-message">Cargando instalaciones...</div>
 
 <div *ngIf="!isLoading" class="instalaciones-container">
-  <button class="back-button" (click)="goBack()">Volver</button>
-  
   <h2 class="titulo">Lista de Instalaciones</h2>
 
   <!-- Buscador de instalaciones -->
@@ -27,6 +25,16 @@
           <p><strong>Descripción:</strong> {{ instalacion.descripcion }}</p>
           <p><strong>Capacidad máxima:</strong> {{ instalacion.capacidad_maxima }}</p>
         </div>
+        <div>
+          <p><strong>Centro: </strong>
+            <a *ngIf="instalacion.id_centro"  
+               [routerLink]="['/centros', instalacion.id_centro]" 
+               class="centro-enlace">
+               {{ instalacion.centro?.[0]?.nombre }}
+            </a>
+            <span *ngIf="!instalacion.id_centro">Centro no disponible</span>
+          </p>
+        </div>        
         <button *ngIf="authService.isAuthenticated()" (click)="reservar(instalacion.id)">
           Reservar
         </button>
