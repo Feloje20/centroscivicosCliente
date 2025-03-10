@@ -15,6 +15,7 @@ export class HeaderComponent {
   userName: string = '';
   userEmail: string = '';
   userPassword: string = ''; // Agregamos el campo de password
+  errorMessage: string = ''; // Mensaje de error
   
   constructor(
       public authService: AuthService,
@@ -36,10 +37,20 @@ export class HeaderComponent {
 
   // Método para manejar refresco de token
   refreshToken() {
-    this.authService.refreshToken().subscribe(
-      () => alert('Token refrescado con éxito'),
-      () => alert('Error refrescando token')
-    );
+    this.authService.refreshToken().subscribe({
+      next: (response: any) => {
+        console.log('Respuesta del servidor:', response);
+  
+        // Guardar el token en localStorage
+        this.authService.saveToken(response.jwt); 
+      },
+      error: (error: any) => {
+        // Mostrar el mensaje de error
+        this.errorMessage = error?.error?.message || 'Credenciales incorrectas';
+        console.error('Error de login', error);
+      }
+    });
   }
+  
 
 }

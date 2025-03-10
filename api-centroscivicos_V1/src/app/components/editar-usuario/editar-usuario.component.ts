@@ -16,6 +16,7 @@ export class EditarUsuarioComponent {
   userName: string = '';
   userEmail: string = '';
   userPassword: string = ''; 
+  errorMessage: string = ''; // Mensaje de error
 
   constructor(
     public authService: AuthService,
@@ -38,15 +39,18 @@ export class EditarUsuarioComponent {
     }
 
     const updatedUser = {
-      usuario: this.userName,  // Cambiar 'name' por 'usuario'
+      usuario: this.userName, 
       email: this.userEmail,
       password: this.userPassword
     };
   
     this.authService.updateUser(updatedUser).subscribe(
       (response) => {
-        // Redirección a la página principal
-        this.router.navigate(['/']);
+        // Al actualizar los datos, deslogeamos al usuario
+        this.authService.logout();
+
+        // Redirigir al usuario a la página de inicio o login después de actualizar los datos
+        this.router.navigate(['/login']);
       },
       (error) => {
         console.error('Error al actualizar el usuario:', error);
