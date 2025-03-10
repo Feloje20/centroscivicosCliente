@@ -2,6 +2,10 @@ h2 {
     text-align: center;
 }
 
+h3  {
+    text-align: center;
+}
+
 /* Estilo general del formulario */
 form {
     max-width: 600px;

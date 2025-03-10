@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common'; // Importar CommonModule
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { GuardaIdsService } from '../../services/guarda-ids.service';
 import { Location } from '@angular/common'; // Importamos Location
+import { CentroService } from '../../services/centro.service';
 
 @Component({
   selector: 'app-nueva-reserva',
@@ -23,18 +24,36 @@ export class NuevaReservaComponent {
     estado: 'pendiente'
   };
   idInstalacion: number | null = null;
+  nombreInstalacion = "";
+  nombreCentro = '';
 
   constructor(
     private reservaService: ReservaService,
     private guardaIdsService: GuardaIdsService,
     private location: Location, // Inyectamos Location
-    private router: Router
+    private router: Router,
+    private centroService: CentroService,
   ) {
     // Obtener el id de la instalación desde el servicio
     this.idInstalacion = this.guardaIdsService.getIdInstalacion();
     if (this.idInstalacion) {
       this.reserva.id_instalacion = this.idInstalacion.toString();
     }
+
+    // Obtenemos el nombre de la instalacion y el centro
+    // Primero recuperamos todas las instalacion y guardamos la info de la correcta
+    // Además recuperamos el nombre del centro de la instalacion
+    this.centroService.getInstalaciones().subscribe((data) => {
+      for (let instalacion of data) {
+        if (instalacion.id === this.idInstalacion) {
+          this.nombreInstalacion = instalacion.nombre;
+          this.centroService.getCentroById(instalacion
+            .id_centro).subscribe((data) => {
+            this.nombreCentro = data.nombre;
+          });
+        }
+      }
+    });
   }
 
   crearReserva() {

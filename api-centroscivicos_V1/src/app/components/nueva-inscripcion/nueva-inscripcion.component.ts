@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common'; // Importar CommonModule
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { GuardaIdsService } from '../../services/guarda-ids.service';
 import { Location } from '@angular/common'; // Importamos Location
+import { CentroService } from '../../services/centro.service';
 
 @Component({
   selector: 'app-nueva-inscripcion',
@@ -22,18 +23,35 @@ export class NuevaInscripcionComponent {
     estado: 'pendiente'
   };
   idActividad: number | null = null;
+  nombreActividad = "";
+  nombreCentro = '';
 
   constructor(
     private inscripcionService: InscripcionService,
     private guardaIdsService: GuardaIdsService,
     private location: Location, // Inyectamos Location
-    private router: Router
+    private router: Router,
+    private centroService: CentroService,
   ) {
     // Obtener el id de la actividad desde el servicio
     this.idActividad = this.guardaIdsService.getIdActividad();
     if (this.idActividad) {
       this.inscripcion.id_actividad = this.idActividad.toString();
     }
+
+    // Obtenemos el nombre de la actividad y el centro
+    // Primero recuperamos todas las actividades y guardamos la info de la correcta
+    // Además recuperamos el nombre del centro de la actividad
+    this.centroService.getActividades().subscribe((data) => {
+      for (let actividad of data) {
+        if (actividad.id === this.idActividad) {
+          this.nombreActividad = actividad.nombre;
+          this.centroService.getCentroById(actividad.id_centro).subscribe((data) => {
+            this.nombreCentro = data.nombre;
+          });
+        }
+      }
+    });
   }
 
   crearInscripcion() {
