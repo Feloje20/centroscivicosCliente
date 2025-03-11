@@ -40,7 +40,7 @@ export class HeaderComponent {
     this.authService.refreshToken().subscribe({
       next: (response: any) => {
         console.log('Respuesta del servidor:', response);
-  
+        alert('Token refrescado');
         // Guardar el token en localStorage
         this.authService.saveToken(response.jwt); 
       },
